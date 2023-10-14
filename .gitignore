@@ -161,4 +161,6 @@ cython_debug/
 
 .idea*
 secret.json
-out.tsv
+*.tsv
+*.ipynb
+*.png
