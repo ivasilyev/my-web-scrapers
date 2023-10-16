@@ -38,8 +38,8 @@ def dump_tsv(
     col_names: list = None,
     reset_index: bool = False
 ):
-    import pandas as pd
-    assert isinstance(df, pd.DataFrame)
+    from pandas import DataFrame
+    assert isinstance(df, DataFrame)
     _df = df.copy()
     os.makedirs(os.path.dirname(table_file), exist_ok=True)
     if col_names is not None and len(col_names) > 0:
@@ -47,3 +47,26 @@ def dump_tsv(
     if reset_index:
         _df.reset_index(inplace=True)
     _df.to_csv(table_file, encoding="utf-8", sep="\t", index=False, header=True)
+
+
+def sanitize_float(s: str):
+    from re import sub
+    return float(sub("[^0-9\.]+", "", sub(",", ".", s)))
+
+
+def randomize_sleep(min_: int = 1, max_: int = 5):
+    from time import sleep
+    from random import randint
+    sleep(randint(min_, max_))
+
+
+def hover_and_click(driver, element):
+    from selenium.webdriver.common.action_chains import ActionChains
+    ActionChains(driver).move_to_element(element).perform()
+    randomize_sleep(1)
+    driver.execute_script("arguments[0].click();", element)
+
+
+def scroll_upon(driver, element):
+    driver.execute_script("arguments[0].scrollIntoView();", element)
+    randomize_sleep(1)
