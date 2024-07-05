@@ -1,5 +1,11 @@
+# pip uninstall -y webdriver-manager selenium
 # pip install -r "requirements.txt"
 
+fake_useragent
+jupyter
 numpy
 pandas
 selenium
+selenium-stealth
+selenium-wire
+webdriver-manager

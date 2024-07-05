@@ -38,6 +38,7 @@ def dump_tsv(
     col_names: list = None,
     reset_index: bool = False
 ):
+    table_file = os.path.abspath(table_file)
     from pandas import DataFrame
     assert isinstance(df, DataFrame)
     _df = df.copy()
@@ -70,3 +71,16 @@ def hover_and_click(driver, element):
 def scroll_upon(driver, element):
     driver.execute_script("arguments[0].scrollIntoView();", element)
     randomize_sleep(1)
+
+
+def remove_empty_values(input_list):
+    output_list = []
+    if input_list is not None:
+        for i in input_list:
+            if i is not None:
+                try:
+                    if len(i) > 0:
+                        output_list.append(i)
+                except TypeError:
+                    continue
+    return output_list
